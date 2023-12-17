@@ -1,0 +1,40 @@
+---
+title: "5 Korean Representative Soccer Clubs"
+output: html_document
+date: "2023-12-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, echo=FALSE}
+library(leaflet)
+
+df <- data.frame(team = c('Seoul FC', 'Ulsan HyunDai', 
+                          'Jeonbuk HyunDai Moters', 'Pohang steelers', 
+                          'Jeju United FC'))
+df$lat <- c(37.564, 35.593, 35.824, 36.019, 33.499)
+df$lng <- c(127.001, 129.352, 127.147, 129.343, 126.531)
+df$popup <- c("<a href='https://www.fcseoul.com/'>Seoul FC</a>",
+              "<a href='https://www.uhfc.tv/'>Ulsan HyunDai</a>",
+              "<a href='https://hyundai-motorsfc.com/'>Jeonbuk HyunDai Moters</a>",
+              "<a href='https://www.steelers.co.kr/'>Pohang steelers</a>",
+              "<a href='https://www.jeju-utd.com/'>Jeju United FC</a>")
+
+iconURL <- c('https://e7.pngegg.com/pngimages/439/770/png-clipart-fc-seoul-pohang-steelers-incheon-sangju-sangmu-fc-suwon-samsung-bluewings-fc-barcelona-emblem-label.png',
+             'https://e7.pngegg.com/pngimages/890/791/png-clipart-ulsan-hyundai-fc-suwon-samsung-bluewings-jeonbuk-hyundai-motors-fc-k-league-1-pohang-steelers-football-text-logo-thumbnail.png',
+             'https://upload.wikimedia.org/wikipedia/ko/a/ab/%EC%A0%84%EB%B6%81_%ED%98%84%EB%8C%80_%EB%AA%A8%ED%84%B0%EC%8A%A4_%EB%A1%9C%EA%B3%A0.png',
+             'https://e7.pngegg.com/pngimages/814/30/png-clipart-pohang-steelers-k-league-1-sangju-sangmu-fc-daegu-fc-incheon-football-emblem-text-thumbnail.png',
+             'https://e7.pngegg.com/pngimages/69/388/png-clipart-jeju-united-fc-2017-k-league-classic-fc-seoul-afc-champions-league-sangju-sangmu-fc-football-antler-label-thumbnail.png')
+
+club_icon <- icons(iconUrl=iconURL, iconWidth=28, iconHeight = 31)
+
+korea_football_map <- df %>% leaflet() %>%
+  addTiles() %>%
+  addMarkers(lat=df$lat, lng=df$lng, icon=club_icon, popup=df$popup)
+
+korea_football_map
+```
+
