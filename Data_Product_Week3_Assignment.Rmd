@@ -1,0 +1,40 @@
+---
+title: "Top 10 Soccer Club's Transfer Profit in 2023"
+author: "KOSW"
+date: "2023-12-19"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+***
+
+```{r, echo=FALSE, message=FALSE, fig.align='center'}
+library(plotly)
+
+club_names <- c('Villareal', 'Benfica', 'Stade Rennais', 'PSV', 'Shakhtar Donetsk',
+                'Roma', 'Atalanta', 'Brighton', 'Palmeiras', 'Southampton')
+nations <- c('Spain', 'Portugal', 'France', 'Netherlands','Ukraine',
+             'Italy','Italy','England','Brazil','England')
+profits <- c(129, 114, 103, 98, 98, 95, 93, 89, 84, 81)
+
+xform <- list(title = 'Club', categoryarray = club_names)
+
+data <- data.frame(club=club_names, nation=nations, net_profit=profits)
+
+ordered <- order(data$net_profit)
+
+
+p <- plot_ly(data=data, x=data$club, y=data$net_profit, color = data$nation,
+             type='bar') %>% 
+  layout(xaxis = xform, yaxis = list(title='Net Profit(Millions euro)'),
+         title='Top 10 Soccer Club\'s Transfer Profit in 2023')
+         
+p
+```
+
+## Thank You :)
+
+
